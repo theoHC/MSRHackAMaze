@@ -2,6 +2,7 @@
 
 import maze
 import sys
+import rbtracing
 
 def main():
     print("Args: ", len(sys.argv))
