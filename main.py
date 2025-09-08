@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-
+import rbtracing
 import maze
 import sys
-import rbtracing
 
 def main():
     print("Args: ", len(sys.argv))
@@ -12,7 +11,12 @@ def main():
 
         mazeobj.load(sys.argv[1])
 
+        tracker = rbtracing.RecursiveBackTracker()
+
+        tracker.solve(mazeobj, (0,0), (1,2))
+
         print(mazeobj)
+        print(tracker.path)
 
 if __name__== "__main__":
     main()

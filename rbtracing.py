@@ -1,6 +1,6 @@
 import maze
 
-class RecursiveBackTracking:
+class RecursiveBackTracker:
     def __init__(self):
         self.path = []
         self.visited = []
@@ -12,7 +12,7 @@ class RecursiveBackTracking:
         
         self.visited.append(start)
 
-        for coords in maze.getAllFreeNeighbors(start) :
+        for coords in problem.getAllFreeNeighbors(start) :
             if(not coords in self.visited):
                 if(self.solve(problem, coords, end)):
                     self.path.append(start)
