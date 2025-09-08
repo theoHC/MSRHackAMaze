@@ -18,18 +18,18 @@ class Maze:
                 self.maze.append(row)
 
     def __str__(self):
-        row_index = 0
         output = ""
-        for row in self.maze:
+        for row_index, row in enumerate(self.maze):
             row_index += 1
             if row_index % 2 == 1:
                 output += " "
             for element in row:
                 if element.isFree:
-                    output += "*"
+                    output += "* "
                 else:
-                    output += "#"
-            output += "\n"
+                    output += "# "
+            if row_index < len(self.maze):
+                output += "\n"
         return output
 
     def getAllNeighbors(self,coords):
