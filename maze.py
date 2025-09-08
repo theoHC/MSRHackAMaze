@@ -3,9 +3,7 @@ class Maze:
 
     def __init__(self) :
         self.maze = [1][1]
-        for row in self.maze:
-            for element in row:
-                element = Cell(True)
+        
     
     def load(self,path):
         print("loading")
@@ -19,7 +17,7 @@ class Maze:
                 print(" ", end="")
             for element in row:
                 if element.isFree:
-                    print(".", end=" ")
+                    print("*", end=" ")
                 else:
                     print("#", end=" ")
                 print("")
