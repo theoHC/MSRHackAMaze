@@ -9,7 +9,7 @@ def main():
         print("Loading maze from arg")
         mazeobj = maze.Maze()
 
-        mazeobj.load(sys.argv[0])
+        mazeobj.load(sys.argv[1])
 
         print(mazeobj)
 
