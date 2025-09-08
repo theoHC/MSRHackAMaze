@@ -20,15 +20,16 @@ class Maze:
                         
     
     def __str__(self):
-        print("printing")
         row_index = 0
+        output = ""
         for row in self.maze:
             row_index += 1
             if row_index % 2 == 1:
-                print(" ", end="")
+                output += " "
             for element in row:
                 if element.isFree:
-                    print("*", end=" ")
+                    output += "*"
                 else:
-                    print("#", end=" ")
-                print("")
+                    output += "#"
+                output += "\n"
+        return output
