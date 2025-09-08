@@ -1,0 +1,1 @@
+[1] Hexagonal adjacency method from ChatGPT - transcript in citationchats/Hexagonal neighbors function.html

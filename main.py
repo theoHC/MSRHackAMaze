@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-
+import rbtracing
 import maze
 import sys
-import rbtracing
 import wavefront
 
 def main():
@@ -13,9 +12,18 @@ def main():
 
         mazeobj.load(sys.argv[1])
 
-        print(mazeobj)
-        solver = wavefront.WaveFrontPlanner((0,0),(1,4),mazeobj)
+        tracker = rbtracing.RecursiveBackTracker()
+
+        start = (0,0)
+        end = (4,4)
+        
+        tracker.solve(mazeobj, start, end)
+        print(mazeobj.renderPath(tracker.path, start, end))
+        print(tracker.path)
+
+        solver = wavefront.WaveFrontPlanner(start,end,mazeobj)
         solver.weighGrid()
+        print(mazeobj.renderPath(solver.returnPath(),start,end))
         print(solver.returnPath())
 
 if __name__== "__main__":
