@@ -16,9 +16,7 @@ class Maze:
                     if(symbol == "#"):
                         row.append(cell.Cell(0,row_id,col_id))
                 self.maze.append(row)
-    
-                        
-    
+
     def __str__(self):
         row_index = 0
         output = ""
@@ -33,3 +31,37 @@ class Maze:
                     output += "#"
             output += "\n"
         return output
+
+    def getAllNeighbors(self,coords):
+        row = coords[0]
+        col = coords[1]
+
+        ############ begin citation [1] ############
+        rows, cols = len(self.maze), len(self.maze[0])
+        # Neighbor offsets differ depending on row parity
+        if row % 2 != 0:  # even row
+            directions = [(-1, 0), (-1, -1),
+                        (0, -1), (0, 1),
+                        (1, 0), (1, -1)]
+        else:  # odd row
+            directions = [(-1, 0), (-1, 1),
+                        (0, -1), (0, 1),
+                        (1, 0), (1, 1)]
+        
+        neighbors = []
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
+            if 0 <= r < rows and 0 <= c < cols:
+                neighbors.append((r, c))
+        
+        return neighbors
+    ############ end citation [1] ############
+                
+    def getAllFreeNeighbors(self,coords):
+        Output = []
+
+        for entry in getAllNeighbors(coords) :
+            if(self.maze[coords[0]][coords[1]].isFree):
+                Output.append(entry)
+
+        
