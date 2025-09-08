@@ -2,7 +2,7 @@ import cell
 class Maze:
 
     def __init__(self) :
-        self.maze = [1][1]
+        self.maze = [[1],[1]]
     
     def Load(self,path):
         print("loading")
