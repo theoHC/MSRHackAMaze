@@ -31,5 +31,5 @@ class Maze:
                     output += "*"
                 else:
                     output += "#"
-                output += "\n"
+            output += "\n"
         return output
