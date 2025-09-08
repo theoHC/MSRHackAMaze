@@ -13,9 +13,12 @@ def main():
 
         tracker = rbtracing.RecursiveBackTracker()
 
-        tracker.solve(mazeobj, (0,0), (1,2))
+        start = (0,0)
+        end = (4,4)
+        
+        tracker.solve(mazeobj, start, end)
 
-        print(mazeobj)
+        print(mazeobj.renderPath(tracker.path, start, end))
         print(tracker.path)
 
 if __name__== "__main__":

@@ -17,7 +17,7 @@ class Maze:
                         row.append(cell.Cell(0,row_id,col_id))
                 self.maze.append(row)
 
-    def __str__(self):
+    def renderPath(self, path, start, end):
         output = ""
         for row_index, row in enumerate(self.maze):
             row_index += 1
@@ -25,12 +25,19 @@ class Maze:
                 output += " "
             for element in row:
                 if element.isFree:
-                    output += "* "
+                    if((element.x, element.y) == start): output += "S "
+                    elif((element.x, element.y) == end): output += "E "
+                    elif((element.x, element.y) in path): output += "P "
+                    else : output += "* "
                 else:
-                    output += "# "
+                    if((element.x, element.y) in path): output += "! "
+                    else : output += "# "
             if row_index < len(self.maze):
                 output += "\n"
         return output
+
+    def __str__(self):
+        return self.renderPath(path=[])
 
     def getAllNeighbors(self,coords):
         row = coords[0]
