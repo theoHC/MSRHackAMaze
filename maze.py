@@ -60,12 +60,12 @@ class Maze:
     def getAllFreeNeighbors(self,coords):
         Output = []
 
-        for entry in getAllNeighbors(coords) :
+        for entry in self.getAllNeighbors(coords) :
             if(self.maze[coords[0]][coords[1]].isFree):
                 Output.append(entry)
         
         return Output
 
     def getNumFreeNeighbors(self, coords):
-        return len(getAllFreeNeighbors(coords))
+        return len(self.getAllFreeNeighbors(coords))
         
