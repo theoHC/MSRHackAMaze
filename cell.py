@@ -1,5 +1,6 @@
-class Cell :
-    isFree
+class Cell:
 
-    def __init__(isFree):
-        this.isFree = isFree
+    def __init__(self,isFree):
+        self.isFree = isFree
+        self.prop = "" #will be set as start or end.
+        
