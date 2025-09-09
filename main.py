@@ -20,8 +20,7 @@ def main():
     #create a recursive backtracker and use it to solve our maze, printing its output
     tracker = rbtracing.RecursiveBackTracker()
 
-    start = (0,0)
-    end = (4,4)
+    start , end = mazeobj.getRandomStartEnd()
     
     tracker.solve(mazeobj, start, end)
     print(mazeobj.renderPath(tracker.path, start, end))

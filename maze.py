@@ -142,7 +142,21 @@ class Maze:
                 Output.append(entry)
         
         return Output, len(Output)
+    
+    def getRandomStartEnd(self):
+        free_cells = []
+        for row in self.maze:
+            for cell in row:
+                if(cell.isFree):
+                    free_cells.append(cell)
 
+        if(free_cells):
+            startendlist = random.sample(free_cells,2)
+
+        start = (startendlist[0].x,startendlist[0].y)
+        end = (startendlist[1].x,startendlist[1].y)
+
+        return start,end
     
 #special main to test maze generation
 def main(): 

@@ -43,7 +43,7 @@ class WaveFrontPlanner:
         while self.visited:
             x , y = self.visited.pop(0)
             current_weight = weight_grid[x][y]
-            neighbours = self.problem.getAllFreeNeighbors((x,y))[0]
+            neighbours = self.findValidNeighbours(x,y)
             for coord in neighbours:
                 x_n, y_n = coord[0], coord[1]
                 if(weight_grid[x_n][y_n] == -1):
@@ -59,7 +59,7 @@ class WaveFrontPlanner:
         (cur_x ,cur_y) = self.start
         while (cur_x,cur_y) != self.goal:
             path.append((cur_x,cur_y))
-            neighbour = self.problem.getAllFreeNeighbors((cur_x,cur_y))[0]
+            neighbour = self.findValidNeighbours(cur_x,cur_y)
 
             least_neighbour = neighbour[0]
             min_weight = self.weight_grid[least_neighbour[0]][least_neighbour[1]]
