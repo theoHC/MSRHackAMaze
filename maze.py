@@ -99,7 +99,7 @@ class Maze:
                 fron_cells.remove(curr_cell)
         #return self.maze
 
-
+    #helper function to get all hexagonally adjacent cells
     def getAllNeighbors(self,coords):
         row = coords[0]
         col = coords[1]
@@ -125,7 +125,7 @@ class Maze:
         return neighbors
     ############ end citation [1] ############
                 
-    
+    #bonus helper functions to filter for wall or free neighbors, since that's what we generally care about.
     def getAllWallNeighbors(self,coords):
         Output = [] 
         for (r,c) in self.getAllNeighbors(coords) :
@@ -144,7 +144,7 @@ class Maze:
         return Output, len(Output)
 
     
-
+#special main to test maze generation
 def main(): 
     new_maze = Maze()
     new_maze.create_random_maze(20,20) 

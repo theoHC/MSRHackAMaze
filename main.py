@@ -7,6 +7,7 @@ import wavefront
 def main():
     mazeobj = maze.Maze()
 
+    #Generate a maze if we provide no arguments, otherwise use the provided file
     if len(sys.argv) > 1:
         print("Args: ", len(sys.argv))
         print("Loading maze from arg")
@@ -16,6 +17,7 @@ def main():
         print("Creating maze")
         mazeobj.create_random_maze(20,20)
 
+    #create a recursive backtracker and use it to solve our maze, printing its output
     tracker = rbtracing.RecursiveBackTracker()
 
     start = (0,0)
@@ -25,6 +27,7 @@ def main():
     print(mazeobj.renderPath(tracker.path, start, end))
     print(tracker.path)
 
+    #create a wavefront solver and do likewise
     solver = wavefront.WaveFrontPlanner(start,end,mazeobj)
     solver.weighGrid()
     print(mazeobj.renderPath(solver.returnPath(),start,end))

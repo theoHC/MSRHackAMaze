@@ -5,6 +5,7 @@ class RecursiveBackTracker:
         self.path = []
         self.visited = []
     
+    #the beauty of recursive backtracking: one recusive function.
     def solve(self, problem, start, end):
         if(start == end):
             self.path.append(start)
