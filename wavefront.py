@@ -5,6 +5,7 @@ class WaveFrontPlanner:
         self.start = start
         self.goal = goal
         self.maze = maze.maze
+        self.problem = maze
         self.rows = len(self.maze)
         self.columns = len(self.maze[0])
         self.visited = []
@@ -42,8 +43,9 @@ class WaveFrontPlanner:
         while self.visited:
             x , y = self.visited.pop(0)
             current_weight = weight_grid[x][y]
-            neighbours = self.findValidNeighbours(x,y)
-            for x_n,y_n in neighbours:
+            neighbours = self.problem.getAllFreeNeighbors((x,y))[0]
+            for coord in neighbours:
+                x_n, y_n = coord[0], coord[1]
                 if(weight_grid[x_n][y_n] == -1):
                     weight_grid[x_n][y_n] = current_weight + 1
                     self.visited.append((x_n,y_n))
@@ -57,12 +59,13 @@ class WaveFrontPlanner:
         (cur_x ,cur_y) = self.start
         while (cur_x,cur_y) != self.goal:
             path.append((cur_x,cur_y))
-            neighbour = self.findValidNeighbours(cur_x,cur_y)
+            neighbour = self.problem.getAllFreeNeighbors((cur_x,cur_y))[0]
 
             least_neighbour = neighbour[0]
             min_weight = self.weight_grid[least_neighbour[0]][least_neighbour[1]]
 
-            for x_n,y_n in neighbour:
+            for coord in neighbour:
+                x_n, y_n = coord[0], coord[1]
                 if self.weight_grid[x_n][y_n] < min_weight:
                     min_weight = self.weight_grid[x_n][y_n]
                     least_neighbour = (x_n,y_n)
