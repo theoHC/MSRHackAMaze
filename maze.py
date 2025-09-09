@@ -19,7 +19,7 @@ class Maze:
                         row.append(cell.Cell(0,row_id,col_id))
                 self.maze.append(row)
 
-    def __str__(self):
+    def renderPath(self, path=None, start=None, end=None):
         output = ""
         for row_index, row in enumerate(self.maze):
             row_index += 1
@@ -27,37 +27,42 @@ class Maze:
                 output += " "
             for element in row:
                 if element.isFree:
-                    output += "* "
+                    if((element.x, element.y) == start): output += "S "
+                    elif((element.x, element.y) == end): output += "E "
+                    elif((element.x, element.y) in path): output += "P "
+                    else : output += "* "
                 else:
-                    output += "# "
+                    if((element.x, element.y) in path): output += "! "
+                    else : output += "# "
             if row_index < len(self.maze):
                 output += "\n"
         return output
+
+    def __str__(self):
+        return self.renderPath(path=[])
     
 
-    def create_random_maze(self, row, col): 
+    def create_random_maze(self, row=10, col=10): 
         # This function creates a random maze that has a solution 
-        
-        mazeobj = Maze() 
-        
+                
         # Creating a maze in which all the cells are walls 
         for i in range(row): 
-            mazeobj.maze.append([]) 
+            self.maze.append([]) 
             for j in range(col): 
                 new_cell = cell.Cell(False, i, j) 
-                mazeobj.maze[i].append(new_cell) 
+                self.maze[i].append(new_cell) 
                 
         # The current cell we are planning to free, the location of initial cell is random 
         curr_x = random.randint(0, row-1) 
         curr_y = random.randint(0, col-1) 
         curr_cell = (curr_x, curr_y) 
-        mazeobj.maze[curr_x][curr_y].isFree = True 
+        self.maze[curr_x][curr_y].isFree = True 
 
         fron_cells, fron_num = [], 0 
         times = 0 
         max_times = row*col
         while times <= max_times: 
-            nei_cells, nei_num = mazeobj.getAllWallNeighbors(curr_cell)
+            nei_cells, nei_num = self.getAllWallNeighbors(curr_cell)
             for nei_cell in nei_cells: 
                 if nei_cell not in fron_cells: 
                     fron_cells.append(nei_cell) 
@@ -69,12 +74,12 @@ class Maze:
             next_potential = random.choice(fron_cells) 
 
             # Search for the next cell that is surrounded by walls 
-            #_, next_potential_nei = mazeobj.getAllWallNeighbors(next_potential) 
+            #_, next_potential_nei = self.getAllWallNeighbors(next_potential) 
             times = 0 
             found = False
             while times < max_times: 
-                _, wall_count = mazeobj.getAllWallNeighbors(next_potential) 
-                nei_count = len(mazeobj.getAllNeighbors(next_potential))
+                _, wall_count = self.getAllWallNeighbors(next_potential) 
+                nei_count = len(self.getAllNeighbors(next_potential))
 
                 free_count = nei_count - wall_count
                 if free_count == 1:
@@ -88,11 +93,11 @@ class Maze:
 
             curr_cell = next_potential 
             curr_x, curr_y = curr_cell 
-            mazeobj.maze[curr_x][curr_y].isFree = True
+            self.maze[curr_x][curr_y].isFree = True
 
             if curr_cell in fron_cells:
                 fron_cells.remove(curr_cell)
-        return mazeobj
+        #return self.maze
 
 
     def getAllNeighbors(self,coords):
@@ -136,14 +141,13 @@ class Maze:
             if(self.maze[coords[0]][coords[1]].isFree):
                 Output.append(entry)
         
-        return Output
+        return Output, len(Output)
 
-    def getNumFreeNeighbors(self, coords):
-        return len(self.getAllFreeNeighbors(coords))
     
 
 def main(): 
-    new_maze = Maze().create_random_maze(20,20) 
+    new_maze = Maze()
+    new_maze.create_random_maze(20,20) 
     print(new_maze) 
     
 

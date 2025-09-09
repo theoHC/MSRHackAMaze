@@ -5,26 +5,30 @@ import sys
 import wavefront
 
 def main():
-    print("Args: ", len(sys.argv))
-    if len(sys.argv) > 1:
-        print("Loading maze from arg")
-        mazeobj = maze.Maze()
+    mazeobj = maze.Maze()
 
+    if len(sys.argv) > 1:
+        print("Args: ", len(sys.argv))
+        print("Loading maze from arg")
         mazeobj.load(sys.argv[1])
 
-        tracker = rbtracing.RecursiveBackTracker()
+    else:
+        print("Creating maze")
+        mazeobj.create_random_maze(20,20)
 
-        start = (0,0)
-        end = (4,4)
-        
-        tracker.solve(mazeobj, start, end)
-        print(mazeobj.renderPath(tracker.path, start, end))
-        print(tracker.path)
+    tracker = rbtracing.RecursiveBackTracker()
 
-        solver = wavefront.WaveFrontPlanner(start,end,mazeobj)
-        solver.weighGrid()
-        print(mazeobj.renderPath(solver.returnPath(),start,end))
-        print(solver.returnPath())
+    start = (0,0)
+    end = (4,4)
+    
+    tracker.solve(mazeobj, start, end)
+    print(mazeobj.renderPath(tracker.path, start, end))
+    print(tracker.path)
+
+    solver = wavefront.WaveFrontPlanner(start,end,mazeobj)
+    solver.weighGrid()
+    print(mazeobj.renderPath(solver.returnPath(),start,end))
+    print(solver.returnPath())
 
 if __name__== "__main__":
     main()
