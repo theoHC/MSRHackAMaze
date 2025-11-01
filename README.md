@@ -1,5 +1,5 @@
 # Maze Solver
-This repository aims at solving a hexagonal maze structure and implementing two maze solving algorithms and also dives into an automatic maze generation approach.
+This repository generates and solves a hexagonal maze. Two planning algorithms, wavefront and recursive backtracking, are implemented. The maze is generated using Prim's algorithm.
 
 ## Planning Algorithms :
 * [Wavefront Planner](https://nu-msr.github.io/hackathon/wavefront.html)
